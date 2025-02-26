@@ -10,7 +10,7 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     ports:
-      - "5433:5433"
+      - "5432:5432"
     networks:
       - laravel_network
 
@@ -22,7 +22,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: hamzasaaf725@gmail.com
       PGADMIN_DEFAULT_PASSWORD: root1234
     ports:
-      - "8083:81"
+      - "8082:80"
     networks:
       - laravel_network
 
