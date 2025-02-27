@@ -22,7 +22,7 @@
 
 @section('content')
     <h2 class="text-2xl font-semibold text-gray-800 mb-6">Tableau de bord</h2>
-    
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <!-- Candidats -->
         <div class="bg-white rounded-md shadow-md p-6">
@@ -36,10 +36,11 @@
                 </div>
             </div>
             <div class="mt-6">
-                <a href="{{ route('admin.candidates.index') }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Voir tous les candidats</a>
+                <a href="" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Voir tous les candidats</a>
+                {{-- {{ route('admin.candidates.index') }} --}}
             </div>
         </div>
-        
+
         <!-- Quiz Complétés -->
         <div class="bg-white rounded-md shadow-md p-6">
             <div class="flex items-center">
@@ -48,14 +49,15 @@
                 </div>
                 <div>
                     <p class="text-gray-500 text-sm">Quiz Complétés</p>
-                    <p class="text-2xl font-semibold text-gray-800">{{ $completedQuizzes }}</p>
+                    <p class="text-2xl font-semibold text-gray-800">{{ $completedQuizzes ?? '' }}</p>
                 </div>
             </div>
             <div class="mt-6">
-                <a href="{{ route('admin.quizzes.results') }}" class="text-green-600 hover:text-green-800 text-sm font-medium">Voir les résultats</a>
+                <a href="" class="text-green-600 hover:text-green-800 text-sm font-medium">Voir les résultats</a>
+                {{-- {{ route('admin.quizzes.results') }} --}}
             </div>
         </div>
-        
+
         <!-- Tests Présentiels -->
         <div class="bg-white rounded-md shadow-md p-6">
             <div class="flex items-center">
@@ -64,14 +66,15 @@
                 </div>
                 <div>
                     <p class="text-gray-500 text-sm">Tests Présentiels</p>
-                    <p class="text-2xl font-semibold text-gray-800">{{ $scheduledTests }}</p>
+                    <p class="text-2xl font-semibold text-gray-800">{{ $scheduledTests ?? '' }}</p>
                 </div>
             </div>
             <div class="mt-6">
-                <a href="{{ route('admin.tests.index') }}" class="text-purple-600 hover:text-purple-800 text-sm font-medium">Voir le planning</a>
+                <a href="" class="text-purple-600 hover:text-purple-800 text-sm font-medium">Voir le planning</a>
+                {{-- {{ route('admin.tests.index') }} --}}
             </div>
         </div>
-        
+
         <!-- Candidats Acceptés -->
         <div class="bg-white rounded-md shadow-md p-6">
             <div class="flex items-center">
@@ -80,15 +83,16 @@
                 </div>
                 <div>
                     <p class="text-gray-500 text-sm">Candidats Acceptés</p>
-                    <p class="text-2xl font-semibold text-gray-800">{{ $acceptedCandidates }}</p>
+                    <p class="text-2xl font-semibold text-gray-800">{{ $acceptedCandidates ?? '' }}</p>
                 </div>
             </div>
             <div class="mt-6">
-                <a href="{{ route('admin.candidates.accepted') }}" class="text-yellow-600 hover:text-yellow-800 text-sm font-medium">Voir les acceptés</a>
+                <a href="" class="text-yellow-600 hover:text-yellow-800 text-sm font-medium">Voir les acceptés</a>
+                {{-- {{ route('admin.candidates.accepted') }} --}}
             </div>
         </div>
     </div>
-    
+
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
         <!-- Récentes Candidatures -->
         <div class="bg-white rounded-md shadow-md">
@@ -107,39 +111,51 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
-                            @forelse($recentCandidates as $candidate)
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-4 py-3">{{ $candidate->first_name }} {{ $candidate->last_name }}</td>
-                                    <td class="px-4 py-3 text-sm">{{ $candidate->created_at->format('d/m/Y') }}</td>
-                                    <td class="px-4 py-3">
-                                        @if($candidate->application_step == 'document_verification')
-                                            <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">Vérification</span>
-                                        @elseif($candidate->application_step == 'quiz')
-                                            <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">Quiz</span>
-                                        @elseif($candidate->application_step == 'scheduled_test')
-                                            <span class="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">Test Planifié</span>
-                                        @elseif($candidate->application_step == 'completed')
-                                            <span class="px-2 py-1 text-xs rounded-full bg-purple-100 text-purple-800">Terminé</span>
-                                        @endif
-                                    </td>
-                                    <td class="px-4 py-3 text-sm">
-                                        <a href="{{ route('admin.candidates.show', $candidate->id) }}" class="text-blue-600 hover:text-blue-800">Détails</a>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="4" class="px-4 py-3 text-sm text-center text-gray-500">Aucune candidature récente</td>
-                                </tr>
-                            @endforelse
+                            @if (is_iterable($recentCandidates ?? ''))
+                                @forelse($recentCandidates as $candidate)
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-4 py-3">{{ $candidate->first_name }} {{ $candidate->last_name }}</td>
+                                        <td class="px-4 py-3 text-sm">{{ $candidate->created_at->format('d/m/Y') }}</td>
+                                        <td class="px-4 py-3">
+                                            @if ($candidate->application_step == 'document_verification')
+                                                <span
+                                                    class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">Vérification</span>
+                                            @elseif($candidate->application_step == 'quiz')
+                                                <span
+                                                    class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">Quiz</span>
+                                            @elseif($candidate->application_step == 'scheduled_test')
+                                                <span
+                                                    class="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">Test
+                                                    Planifié</span>
+                                            @elseif($candidate->application_step == 'completed')
+                                                <span
+                                                    class="px-2 py-1 text-xs rounded-full bg-purple-100 text-purple-800">Terminé</span>
+                                            @endif
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            <a href="{{ route('admin.candidates.show', $candidate->id) }}"
+                                                class="text-blue-600 hover:text-blue-800">Détails</a>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="4" class="px-4 py-3 text-center text-gray-500">Aucun candidat
+                                            trouvé.</td>
+                                    </tr>
+                                @endforelse
+                            @endif
+
                         </tbody>
                     </table>
                 </div>
                 <div class="mt-4">
-                    <a href="{{ route('admin.candidates.index') }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Voir tous</a>
+                    {{-- {{ route('admin.candidates.index') }} --}}
+                    <a href=""
+                        class="text-blue-600 hover:text-blue-800 text-sm font-medium">Voir tous</a>
                 </div>
             </div>
         </div>
-        
+
         <!-- Tests planifiés -->
         <div class="bg-white rounded-md shadow-md">
             <div class="px-6 py-4 border-b">
@@ -157,28 +173,32 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
-                            @forelse($upcomingTests as $test)
+                            @forelse(is_array($upcomingTests ?? '') || is_object($upcomingTests ?? '') ? $upcomingTests ?? '' : [] as $test)
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-4 py-3">{{ \Carbon\Carbon::parse($test->date)->format('d/m/Y') }}</td>
-                                    <td class="px-4 py-3 text-sm">{{ \Carbon\Carbon::parse($test->time)->format('H:i') }}</td>
+                                    <td class="px-4 py-3 text-sm">{{ \Carbon\Carbon::parse($test->time)->format('H:i') }}
+                                    </td>
                                     <td class="px-4 py-3 text-sm">{{ $test->candidates_count }}</td>
                                     <td class="px-4 py-3 text-sm">{{ $test->examiner->name }}</td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4" class="px-4 py-3 text-sm text-center text-gray-500">Aucun test planifié</td>
+                                    <td colspan="4" class="px-4 py-3 text-sm text-center text-gray-500">Aucun test
+                                        planifié</td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
                 </div>
                 <div class="mt-4">
-                    <a href="{{ route('admin.tests.index') }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Voir tous les tests</a>
+                    {{-- {{ route('admin.tests.index') }} --}}
+                    <a href=""
+                        class="text-blue-600 hover:text-blue-800 text-sm font-medium">Voir tous les tests</a>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div class="bg-white rounded-md shadow-md">
         <div class="px-6 py-4 border-b">
             <h3 class="text-lg font-semibold text-gray-800">Statistiques</h3>
@@ -187,41 +207,49 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="border rounded-md p-4">
                     <h4 class="text-sm font-medium text-gray-500 mb-2">Taux de Conversion Quiz</h4>
-                    <p class="text-xl font-bold">{{ number_format($quizConversionRate, 1) }}%</p>
+                    <p class="text-xl font-bold">022%</p>
+                    {{-- {{ number_format((float)$quizConversionRate?? '' , 1) }} --}}
                     <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
-                        <div class="bg-blue-600 h-2.5 rounded-full" style="width: {{ $quizConversionRate }}%"></div>
+                        <div class="bg-blue-600 h-2.5 rounded-full" style="width: "></div>
+                        {{-- {{ $quizConversionRate ?? ''  }}% --}}
                     </div>
                 </div>
-                
+
                 <div class="border rounded-md p-4">
                     <h4 class="text-sm font-medium text-gray-500 mb-2">Taux d'Acceptation Final</h4>
-                    <p class="text-xl font-bold">{{ number_format($finalAcceptanceRate, 1) }}%</p>
+                    <p class="text-xl font-bold">878% </p>
+                    {{-- {{ number_format($finalAcceptanceRate ?? '' , 1) }}--}}
                     <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
-                        <div class="bg-green-600 h-2.5 rounded-full" style="width: {{ $finalAcceptanceRate }}%"></div>
+                        <div class="bg-green-600 h-2.5 rounded-full" style="width:"></div>
+                        {{-- {{ $finalAcceptanceRate ?? ''  }}% --}}
                     </div>
                 </div>
-                
+
                 <div class="border rounded-md p-4">
                     <h4 class="text-sm font-medium text-gray-500 mb-2">Score Moyen Quiz</h4>
-                    <p class="text-xl font-bold">{{ number_format($averageQuizScore, 1) }}/100</p>
+                    <p class="text-xl font-bold">1/100</p>
+                    {{-- {{ number_format($averageQuizScore ?? '' , 1) }} --}}
                     <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
-                        <div class="bg-yellow-600 h-2.5 rounded-full" style="width: {{ $averageQuizScore }}%"></div>
+                        <div class="bg-yellow-600 h-2.5 rounded-full" style="width: "></div>
+                        {{-- {{ $averageQuizScore ?? ''  }}% --}}
                     </div>
                 </div>
-                
-                <div class="border rounded-md p-4">
+
+                {{-- <div class="border rounded-md p-4">
                     <h4 class="text-sm font-medium text-gray-500 mb-2">Candidatures Mensuelles</h4>
-                    <p class="text-xl font-bold">{{ $monthlyApplications }}</p>
+                    <p class="text-xl font-bold">{{ $monthlyApplications ?? ''  }}</p>
                     <p class="text-sm text-gray-500 mt-2">
-                        @if($applicationGrowth > 0)
-                            <span class="text-green-600"><i class="fas fa-arrow-up"></i> {{ number_format($applicationGrowth, 1) }}%</span>
-                        @elseif($applicationGrowth < 0)
-                            <span class="text-red-600"><i class="fas fa-arrow-down"></i> {{ number_format(abs($applicationGrowth), 1) }}%</span>
+                        @if ($applicationGrowth ?? ''  > 0)
+                            <span class="text-green-600"><i class="fas fa-arrow-up"></i>
+                                {{ number_format($applicationGrowth ?? '' , 1) }}%</span>
+                        @elseif($applicationGrowth ?? ''  < 0)
+                            <span class="text-red-600"><i class="fas fa-arrow-down"></i>
+                                {{ number_format(abs($applicationGrowth ?? '' ), 1) }}%</span>
                         @else
                             <span class="text-gray-600"><i class="fas fa-equals"></i> 0%</span>
                         @endif
                         depuis le mois dernier
-                    </p>
+                    </p> --}}
                 </div>
             </div>
         </div>

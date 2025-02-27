@@ -8,10 +8,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
     <!-- Tailwind CSS -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <script src="{{ mix('js/app.js') }}"></script>
+    
+    
     
     <!-- AlpineJS -->
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
+    
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -31,32 +34,32 @@
             </div>
             
             <nav class="mt-10">
-                <a class="flex items-center mt-4 py-2 px-6 text-gray-100 hover:bg-blue-700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('admin.dashboard') }}">
+                <a class="flex items-center mt-4 py-2 px-6 text-gray-100 hover:bg-blue-700 hover:bg-opacity-25 hover:text-gray-100" href="">
                     <i class="fas fa-tachometer-alt mr-3"></i>
                     Tableau de bord
                 </a>
                 
-                <a class="flex items-center mt-4 py-2 px-6 text-gray-100 hover:bg-blue-700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('admin.candidates.index') }}">
+                <a class="flex items-center mt-4 py-2 px-6 text-gray-100 hover:bg-blue-700 hover:bg-opacity-25 hover:text-gray-100" href="">
                     <i class="fas fa-users mr-3"></i>
                     Candidats
                 </a>
                 
-                <a class="flex items-center mt-4 py-2 px-6 text-gray-100 hover:bg-blue-700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('admin.quizzes.index') }}">
+                <a class="flex items-center mt-4 py-2 px-6 text-gray-100 hover:bg-blue-700 hover:bg-opacity-25 hover:text-gray-100" href="">
                     <i class="fas fa-question-circle mr-3"></i>
                     Quiz
                 </a>
                 
-                <a class="flex items-center mt-4 py-2 px-6 text-gray-100 hover:bg-blue-700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('admin.tests.index') }}">
+                <a class="flex items-center mt-4 py-2 px-6 text-gray-100 hover:bg-blue-700 hover:bg-opacity-25 hover:text-gray-100" href="">
                     <i class="fas fa-clipboard-check mr-3"></i>
                     Tests Présentiels
                 </a>
                 
-                <a class="flex items-center mt-4 py-2 px-6 text-gray-100 hover:bg-blue-700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('admin.staff.index') }}">
+                <a class="flex items-center mt-4 py-2 px-6 text-gray-100 hover:bg-blue-700 hover:bg-opacity-25 hover:text-gray-100" href="">
                     <i class="fas fa-user-tie mr-3"></i>
                     Personnel
                 </a>
                 
-                <a class="flex items-center mt-4 py-2 px-6 text-gray-100 hover:bg-blue-700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('admin.settings') }}">
+                <a class="flex items-center mt-4 py-2 px-6 text-gray-100 hover:bg-blue-700 hover:bg-opacity-25 hover:text-gray-100" href="">
                     <i class="fas fa-cog mr-3"></i>
                     Paramètres
                 </a>
@@ -81,9 +84,9 @@
                         <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
 
                         <div x-show="dropdownOpen" class="absolute right-0 mt-2 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10">
-                            <a href="{{ route('admin.profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-700 hover:text-white">Profile</a>
-                            <a href="{{ route('admin.settings') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-700 hover:text-white">Paramètres</a>
-                            <form action="{{ route('logout') }}" method="POST">
+                            <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-700 hover:text-white">Profile</a>
+                            <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-700 hover:text-white">Paramètres</a>
+                            <form action="" method="POST">
                                 @csrf
                                 <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-700 hover:text-white">Déconnexion</button>
                             </form>
