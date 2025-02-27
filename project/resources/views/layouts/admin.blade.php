@@ -39,7 +39,8 @@
                     Tableau de bord
                 </a>
                 
-                <a class="flex items-center mt-4 py-2 px-6 text-gray-100 hover:bg-blue-700 hover:bg-opacity-25 hover:text-gray-100" href="">
+
+                <a class="flex items-center mt-4 py-2 px-6 text-gray-100 hover:bg-blue-700 hover:bg-opacity-25 hover:text-gray-100" href="{{route('admin.candidates.index')}}">
                     <i class="fas fa-users mr-3"></i>
                     Candidats
                 </a>

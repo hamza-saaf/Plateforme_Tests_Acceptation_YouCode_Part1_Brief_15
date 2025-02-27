@@ -7,7 +7,8 @@
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-semibold text-gray-800">Gestion des Candidats</h2>
         <div class="flex space-x-2">
-            <a href="{{ route('admin.candidates.export') }}"
+            {{-- {{ route('admin.candidates.export') }} --}}
+            <a href=""
                 class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded">
                 <i class="fas fa-file-excel mr-2"></i> Exporter
             </a>
@@ -16,7 +17,8 @@
 
     <!-- Filtres -->
     <div class="bg-white rounded-md shadow-md p-6 mb-6">
-        <form action="{{ route('admin.candidates.index') }}" method="GET"
+        {{-- {{ route('admin.candidates.index') }} --}}
+        <form action="" method="GET"
             class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
             <div>
                 <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Recherche</label>
@@ -56,7 +58,8 @@
                 <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded">
                     <i class="fas fa-search mr-2"></i> Filtrer
                 </button>
-                <a href="{{ route('admin.candidates.index') }}"
+                {{-- {{ route('admin.candidates.index') }} --}}
+                <a href=""
                     class="ml-2 bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded">
                     <i class="fas fa-times mr-2"></i> Réinitialiser
                 </a>
@@ -94,7 +97,7 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    @forelse($candidates as $candidate)
+                    @forelse(is_iterable($candidates ?? '') ? $candidates ?? '' : [] as $candidate)
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $candidate->id }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
@@ -182,17 +185,20 @@
                 <div class="mb-4 sm:mb-0">
                     <p class="text-sm text-gray-700">
                         Affichage de
-                        <span class="font-medium">{{ $candidates->firstItem() ?? 0 }}</span>
+                        {{-- {{ $candidates->firstItem() ?? 0 }} --}}
+                        <span class="font-medium">123</span>
                         à
-                        <span class="font-medium">{{ $candidates->lastItem() ?? 0 }}</span>
+                        {{-- {{ $candidates->lastItem() ?? 0 }} --}}
+                        <span class="font-medium">1234</span>
                         sur
-                        <span class="font-medium">{{ $candidates->total() }}</span>
+                        {{-- {{ $candidates->total() }} --}}
+                        <span class="font-medium">12345</span>
                         résultats
                     </p>
                 </div>
 
                 <div>
-                    {{ $candidates->appends(request()->query())->links() }}
+                  hello youcode   {{-- {{ $candidates->appends(request()->query())->links() }} --}}
                 </div>
             </div>
         </div>
@@ -232,19 +238,23 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div class="border rounded-md p-4">
                 <h4 class="text-sm font-medium text-gray-500 mb-2">Total</h4>
-                <p class="text-xl font-bold">{{ $candidates->total() }}</p>
+                {{-- {{ $candidates->total() }} --}}
+                <p class="text-xl font-bold">113</p>
             </div>
             <div class="border rounded-md p-4">
                 <h4 class="text-sm font-medium text-gray-500 mb-2">Cette semaine</h4>
-                <p class="text-xl font-bold">{{ $weeklyApplications ?? 0 }}</p>
+                {{-- {{ $weeklyApplications ?? 0 }} --}}
+                <p class="text-xl font-bold">114</p>
             </div>
             <div class="border rounded-md p-4">
                 <h4 class="text-sm font-medium text-gray-500 mb-2">Score moyen (Quiz)</h4>
-                <p class="text-xl font-bold">{{ number_format($averageQuizScore ?? 0, 1) }}/100</p>
+                {{-- {{ number_format($averageQuizScore ?? 0, 1) }} --}}
+                <p class="text-xl font-bold">34/100</p>
             </div>
             <div class="border rounded-md p-4">
                 <h4 class="text-sm font-medium text-gray-500 mb-2">Taux de conversion</h4>
-                <p class="text-xl font-bold">{{ number_format($conversionRate ?? 0, 1) }}%</p>
+                {{-- {{ number_format($conversionRate ?? 0, 1) }} --}}
+                <p class="text-xl font-bold">123%</p>
             </div>
         </div>
     </div>
@@ -253,15 +263,18 @@
     <div class="mt-6 bg-white rounded-md shadow-md p-6">
         <h3 class="text-lg font-medium text-gray-900 mb-4">Actions groupées</h3>
         <div class="flex flex-wrap gap-4">
-            <a href="{{ route('admin.candidates.verify-all') }}"
+            {{-- {{ route('admin.candidates.verify-all') }} --}}
+            <a href=""
                 class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded">
                 <i class="fas fa-check-double mr-2"></i> Valider tous les documents en attente
             </a>
-            <a href="{{ route('admin.candidates.send-reminders') }}"
+            {{-- {{ route('admin.candidates.send-reminders') }} --}}
+            <a href=""
                 class="bg-yellow-600 hover:bg-yellow-700 text-white font-medium py-2 px-4 rounded">
                 <i class="fas fa-bell mr-2"></i> Envoyer des rappels
             </a>
-            <a href="{{ route('admin.candidates.schedule-bulk') }}"
+            {{-- {{ route('admin.candidates.schedule-bulk') }} --}}
+            <a href=""
                 class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded">
                 <i class="fas fa-calendar-plus mr-2"></i> Planifier tests par lot
             </a>
@@ -297,7 +310,8 @@
                         analyses plus poussées.</li>
                 </ul>
                 <p>Pour plus d'informations, consultez la documentation complète dans la section <a
-                        href="{{ route('admin.documentation') }}"
+                    {{-- {{ route('admin.documentation') }} --}}
+                        href=""
                         class="text-blue-600 hover:text-blue-800">Documentation</a>.</p>
             </div>
         </div>
