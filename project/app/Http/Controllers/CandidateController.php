@@ -8,6 +8,7 @@ class CandidateController extends Controller
 {
     public function index()
     { /* List all candidates */
+        return view('admin.candidates.index');
     }
     public function create()
     { /* Show form to create candidate */
