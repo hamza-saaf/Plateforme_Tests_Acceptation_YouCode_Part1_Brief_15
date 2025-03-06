@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -17,8 +17,10 @@ class QuizController extends Controller
      */
     public function index()
     {
-        $quizzes = Quiz::all();
-        return view('admin.quizzes.index', compact('quizzes'));
+        return view('candidate.quiz');
+
+        // $quizzes = Quiz::all();
+        // return view('candidate.quiz.index', compact('quizzes'));
     }
 
     /**
