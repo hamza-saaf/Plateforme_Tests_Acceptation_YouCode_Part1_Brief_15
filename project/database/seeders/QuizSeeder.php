@@ -12,19 +12,19 @@ class QuizSeeder extends Seeder
         DB::table('quizzes')->insert([
             [
                 'title' => 'Logique',
-                'description' => 'answer the quietions',
+                'description' => 'Answer the question quickly',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'title' => 'Memory',
-                'description' => 'answer the quietions',
+                'description' => 'Answer the question quickly',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'title' => 'Matimatique',
-                'description' => 'answer the quietions',
+                'description' => 'Answer the question quickly',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]

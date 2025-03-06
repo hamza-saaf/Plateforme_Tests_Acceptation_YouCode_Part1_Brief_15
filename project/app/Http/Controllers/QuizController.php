@@ -17,10 +17,8 @@ class QuizController extends Controller
      */
     public function index()
     {
-        return view('candidate.quiz');
-
-        // $quizzes = Quiz::all();
-        // return view('candidate.quiz.index', compact('quizzes'));
+        $quizzes= Quiz::find(1);
+        return view('candidate.quiz',compact('quizzes'));
     }
 
     /**

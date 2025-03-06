@@ -10,9 +10,9 @@
 <body class="bg-gray-100">
     <div class="min-h-screen flex items-center justify-center p-4">
         <div class="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
-            <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">
-                Quiz Challenge in 
-            </h1>
+            <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">Quiz Challenge in:</h1>
+                <h4 class="text-xl  mb-6 text-center text-slate-600">{{$quizzes->title}}</h4>
+                <h4 class="text-xl  mb-6 text-center text-slate-600">{{$quizzes->description}}??</h4>
             {{-- {{ route('quiz.submit') }} --}}
             <form method="POST" action="">
                 @csrf
